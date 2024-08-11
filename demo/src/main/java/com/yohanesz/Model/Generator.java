@@ -1,6 +1,8 @@
 package com.yohanesz.Model;
 
 import com.yohanesz.languages.javaClass;
+import com.yohanesz.languages.pythonClass;
+
 import static com.yohanesz.Model.optionLanguage.*;
 import com.yohanesz.Model.Modifier;
 import com.yohanesz.Model.Type;
@@ -13,7 +15,7 @@ public class Generator {
         if (language == JAVA) {
             cInterface = new javaClass();
         } else if (language == PYTHON) {
-            // cInterface = new pythonClass();
+            cInterface = new pythonClass();
         } else {
             throw new IllegalArgumentException("Linguagem não suportada: " + language);
         }

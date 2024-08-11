@@ -15,14 +15,7 @@ public interface classInterface {
     void generateConstructor();
     void addAttribute(Modifier modifier, Type type, String name);
     void addMethod(Modifier modifier, Type type, String name);
-
-    // T generateClass(String name, StringBuilder sb);
-    // void generateClass(String name);
-    // void addModifier(Modifier modifier);
-    // void generateAttribute(String attribute, Type type, Modifier modifier);
-    // void generateMethod(String name, Type typeOfReturn, Modifier modifier);
-    // void generateConstructor(String[] attributes);
-
+    
   
 
 
