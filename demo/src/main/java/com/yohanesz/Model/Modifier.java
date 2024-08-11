@@ -2,14 +2,14 @@ package com.yohanesz.Model;
 
 public enum Modifier {
     
-    PRIVATE("private"),
-    PUBLIC("public"),
-    PROTECTED("protected"),
+    PRIVATE("private "),
+    PUBLIC("public "),
+    PROTECTED("protected "),
     DEFAULT(""), // Representa o modificador de acesso padrão (package-private)
-    ABSTRACT("abstract"),
-    STATIC("static"),
-    FINAL("final"),
-    SYNCHRONIZED("synchronized");
+    ABSTRACT("abstract "),
+    STATIC("static "),
+    FINAL("final "),
+    SYNCHRONIZED("synchronized ");
 
     private final String modifier;
 

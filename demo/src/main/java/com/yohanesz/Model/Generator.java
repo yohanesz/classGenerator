@@ -19,8 +19,12 @@ public class Generator {
         }
     }
 
-    public void createClass(String nome) {
-        cInterface.createClass(nome);
+    public void setDirectory(String directory) {
+        cInterface.setDirectory(directory);
+    }
+
+    public void createClass(String nome, Modifier modifier) {
+        cInterface.createClass(nome, modifier);
     }
 
     public void addAttribute(Modifier modifier, Type type, String name){

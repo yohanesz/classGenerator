@@ -15,7 +15,8 @@ public class Main {
     
         Generator gn = new Generator(JAVA);
 
-        gn.createClass("primeiroTeste");
+        gn.setDirectory("demo/src/main/java/com/yohanesz/generatedClasses");
+        gn.createClass("primeiroTeste", Modifier.PUBLIC);
         gn.addAttribute(Modifier.PRIVATE, Type.INTEGER, "num1");
         gn.addAttribute(Modifier.PRIVATE, Type.STRING, "num2");
         gn.addAttribute(Modifier.DEFAULT, Type.BOOLEAN, "num3");

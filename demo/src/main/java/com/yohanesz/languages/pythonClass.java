@@ -1,71 +1,101 @@
 package com.yohanesz.languages;
-// package com.yohanesz;
 
-// import java.io.File;
-// import java.io.FileWriter;
-// import java.io.IOException;
-// import java.util.HashMap;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
-// public class pythonClass implements classInterface<pythonClass>{
+import com.yohanesz.Model.Attribute;
+import com.yohanesz.Model.Class;
+import com.yohanesz.Model.Method;
+import com.yohanesz.Model.Modifier;
+import com.yohanesz.Model.Type;
+import com.yohanesz.Model.classInterface;
 
-//     String extension = getClass().getSimpleName();
-    
+public class pythonClass implements classInterface {
 
-//     public void createClass(String name) {
-//         File file = new File(directory + "/" + name + ".py");
-//         StringBuilder sb = new StringBuilder();
-//         sb.append("class ").append(name).append(":").append("\n\n");
+    private StringBuilder sb = new StringBuilder();
+    private String directory;
+    private Class clazz;
 
-//         try (FileWriter writer = new FileWriter(file)) {
-//             writer.write(sb.toString());
-//         } catch (IOException e) {
-//             e.printStackTrace();
-//         }
-//     }
+    public pythonClass() {
+        this.clazz = new Class();
+    }
 
+    public void setDirectory(String directory) {
+        this.directory = directory;
+    }
 
-//     @Override
-//     public File createFile(String name) {
-//         // TODO Auto-generated method stub
-//         throw new UnsupportedOperationException("Unimplemented method 'createFile'");
-//     }
+    public void createClass(String name, Modifier modifier) {
+        clazz.setClassName(name);
+        clazz.setClassModifier(modifier.getModifierName());
+    }
 
+    public File createFile() {
+        File file = new File(directory + "/" + clazz.getClassName() + ".py");
+        return file;
+    }
 
-//     @Override
-//     public pythonClass generateClass(String name) {
-//         // TODO Auto-generated method stub
-//         throw new UnsupportedOperationException("Unimplemented method 'generateClass'");
-//     }
+    public void generateClass() {
 
+        File file = createFile();
+        sb.append("class ")
+          .append(clazz.getClassName())
+          .append(":\n\n");
 
-//     @Override
-//     public pythonClass addModifier(Modifier modifier) {
-//         // TODO Auto-generated method stub
-//         throw new UnsupportedOperationException("Unimplemented method 'addModifier'");
-//     }
+        generateConstructor();
+        generateAttribute(); 
+        generateMethod();   
 
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(sb.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-//     @Override
-//     public pythonClass generateAttribute(String attribute, Type type, Modifier modifier) {
-//         // TODO Auto-generated method stub
-//         throw new UnsupportedOperationException("Unimplemented method 'generateAttribute'");
-//     }
+    public void generateAttribute() {
+        ArrayList<Attribute> attributes = clazz.getAttributes();
+        sb.append("    def __init__(self");
+        for (Attribute attribute : attributes) {
+            sb.append(", ").append(attribute.getAttributeName());
+        }
+        sb.append("):\n");
 
+        for (Attribute attribute : attributes) {
+            sb.append("        self.")
+              .append(attribute.getAttributeName())
+              .append(" = ")
+              .append(attribute.getAttributeName())
+              .append("\n");
+        }
+        sb.append("\n");
+    }
 
-//     @Override
-//     public pythonClass generateMethod(String method) {
-//         // TODO Auto-generated method stub
-//         throw new UnsupportedOperationException("Unimplemented method 'generateMethod'");
-//     }
+    public void generateMethod() {
+        ArrayList<Method> methods = clazz.getMethods();
+        for (Method method : methods) {
+            sb.append("    def ")
+              .append(method.getMethodName())
+              .append("(self):\n")
+              .append("        pass\n\n");
+        }
+    }
 
+    public void addAttribute(Modifier modifier, Type type, String name) {
+        Attribute atr = new Attribute(modifier.getModifierName(), type.getTypeName(), name);
+        clazz.addAttribute(atr);
+    }
 
-//     @Override
-//     public pythonClass generateConstructor(String[] attributes) {
-//         // TODO Auto-generated method stub
-//         throw new UnsupportedOperationException("Unimplemented method 'generateConstructor'");
-//     }
+    public void addMethod(Modifier modifier, Type type, String name) {
+        Method mtd = new Method(modifier.getModifierName(), type.getTypeName(), name);
+        clazz.addMethod(mtd);
+    }
 
+    public void generateConstructor() {
+        // A lógica de construção do método construtor foi movida para generateAttributes
+        // pois em Python o construtor é definido junto com os atributos na função __init__
+    }
 
-
-// }
-// p
+  
+}

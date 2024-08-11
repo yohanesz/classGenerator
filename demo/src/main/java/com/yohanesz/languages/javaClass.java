@@ -16,16 +16,20 @@ import com.yohanesz.Model.classInterface;
 public class javaClass implements classInterface{
 
     private StringBuilder sb = new StringBuilder();
-    String directory = "/home/yohanes/Default/projetos.POO/classGenerator/demo/src/main/java/com/yohanesz/generatedClasses";
-    
+    private String directory;
     private Class clazz;
 
     public javaClass() {
         this.clazz = new Class();
     }
 
-    public void createClass(String name) {
+    public void setDirectory(String directory) {
+        this.directory = directory;
+    }
+
+    public void createClass(String name, Modifier modifier ) {
         clazz.setClassName(name);
+        clazz.setClassModifier(modifier.getModifierName());
     }
     
     public File createFile() {
@@ -36,7 +40,10 @@ public class javaClass implements classInterface{
     public void generateClass() {
 
         File file = createFile();
-        sb.append("class ").append(clazz.getClassName()).append(" {\n\n\n");
+        sb.append(clazz.getClassModifier())
+        .append("class ")
+        .append(clazz.getClassName())
+        .append(" {\n\n\n");
         generateConstructor();
         generateAttribute(); 
         generateMethod();   
@@ -54,8 +61,8 @@ public class javaClass implements classInterface{
     public void generateAttribute() {
         ArrayList<Attribute> attributes = clazz.getAttributes();
         for (Attribute attribute : attributes) {
-            sb.append(attribute.getModifier())
-            .append(" ")
+            sb.append("    ")
+            .append(attribute.getModifier())
             .append(attribute.getType())
             .append(" ")
             .append(attribute.getAttributeName())
@@ -67,12 +74,12 @@ public class javaClass implements classInterface{
         sb.append("\n");
         ArrayList<Method> methods = clazz.getMethods();
         for (Method method : methods) {
-            sb.append(method.getModifier())
-              .append(" ")
+            sb.append("    ")
+              .append(method.getModifier())
               .append(method.getType())
               .append(" ")
               .append(method.getMethodName())
-              .append("() {\n    // Implementação\n }\n");
+              .append("() {\n    // Implementação\n    }\n\n");
         }
     }
 
@@ -87,12 +94,12 @@ public class javaClass implements classInterface{
     }
 
     public void generateConstructor() {
-        sb.append("public ").append(clazz.getClassName()).append("() {\n");
-        sb.append("    // Construtor vazio\n");
-        sb.append("}\n\n");
+        sb.append("    public ").append(clazz.getClassName()).append("() {\n");
+        sb.append("        // Construtor vazio\n");
+        sb.append("    }\n\n");
 
 
-        sb.append("public ").append(clazz.getClassName()).append("(");
+        sb.append("    public ").append(clazz.getClassName()).append("(");
         
         ArrayList<Attribute> attributes = clazz.getAttributes();
         for (int i = 0; i < attributes.size(); i++) {
@@ -105,9 +112,9 @@ public class javaClass implements classInterface{
         sb.append(") {\n");
 
         for (Attribute attribute : attributes) {
-            sb.append("    this.").append(attribute.getAttributeName()).append(" = ").append(attribute.getAttributeName()).append(";\n");
+            sb.append("        this.").append(attribute.getAttributeName()).append(" = ").append(attribute.getAttributeName()).append(";\n");
         }
-        sb.append("}\n\n");
+        sb.append("    }\n\n");
     }
 
 }

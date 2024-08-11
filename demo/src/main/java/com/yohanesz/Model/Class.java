@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Class {
 
+    private String classModifier;
     private String className;
     private ArrayList<Attribute> attributes = new ArrayList<>();
     private ArrayList<Method> methods = new ArrayList<>();
@@ -33,7 +34,16 @@ public class Class {
 
     public void addMethod(Method mtd) {
         methods.add(mtd);
-    } 
+    }
+
+    public String getClassModifier() {
+        return classModifier;
+    }
+    
+    public void setClassModifier(String classModifier) {
+        this.classModifier = classModifier;
+    }
+
 
     
 

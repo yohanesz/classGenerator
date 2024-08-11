@@ -6,9 +6,8 @@ import java.util.HashMap;
 
 public interface classInterface {
 
-    String directory = "/home/yohanes/Default/projetos.POO/classGenerator/demo/src/main/java/com/yohanesz/generatedClasses";
-
-    void createClass(String name);
+    void setDirectory(String directory);
+    void createClass(String name, Modifier modifier);
     File createFile();
     void generateClass();
     void generateAttribute();
