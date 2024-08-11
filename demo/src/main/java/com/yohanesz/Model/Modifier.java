@@ -1,4 +1,4 @@
-package com.yohanesz;
+package com.yohanesz.Model;
 
 public enum Modifier {
     
