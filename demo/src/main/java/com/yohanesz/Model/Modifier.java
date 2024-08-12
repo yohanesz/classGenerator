@@ -7,9 +7,7 @@ public enum Modifier {
     PROTECTED("protected "),
     DEFAULT(""), // Representa o modificador de acesso padrão (package-private)
     ABSTRACT("abstract "),
-    STATIC("static "),
-    FINAL("final "),
-    SYNCHRONIZED("synchronized ");
+    STATIC("static ");
 
     private final String modifier;
 

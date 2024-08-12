@@ -6,8 +6,6 @@ import static com.yohanesz.Model.optionLanguage.PYTHON;
 import com.yohanesz.Model.Generator;
 import com.yohanesz.Model.Modifier;
 import com.yohanesz.Model.Type;
-import com.yohanesz.Model.optionLanguage;
-import com.yohanesz.languages.javaClass;
 
 public class Main {
 

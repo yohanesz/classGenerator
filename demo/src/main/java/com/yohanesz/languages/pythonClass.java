@@ -15,15 +15,10 @@ import com.yohanesz.Model.classInterface;
 public class pythonClass implements classInterface {
 
     private StringBuilder sb = new StringBuilder();
-    private String directory;
     private Class clazz;
 
-    public pythonClass() {
-        this.clazz = new Class();
-    }
-
-    public void setDirectory(String directory) {
-        this.directory = directory;
+    public pythonClass(Class clazz) {
+        this.clazz = clazz;
     }
 
     public void createClass(String name, Modifier modifier) {
@@ -31,14 +26,14 @@ public class pythonClass implements classInterface {
         clazz.setClassModifier(modifier.getModifierName());
     }
 
-    public File createFile() {
+    public File createFile(String directory) {
         File file = new File(directory + "/" + clazz.getClassName() + ".py");
         return file;
     }
 
-    public void generateClass() {
+    public void generateClass(String directory) {
 
-        File file = createFile();
+        File file = createFile(directory);
         sb.append("class ")
           .append(clazz.getClassName())
           .append(":\n\n");

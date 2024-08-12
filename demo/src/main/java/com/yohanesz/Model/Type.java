@@ -1,8 +1,9 @@
 package com.yohanesz.Model;
 
 public enum Type {
-    
-    INTEGER("int"),
+
+    INTEGER("Integer"),
+    INT("int"),
     STRING("String"),
     BOOLEAN("boolean"),
     FLOAT("float"),

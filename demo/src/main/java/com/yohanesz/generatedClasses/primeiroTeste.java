@@ -1,6 +1,6 @@
 private class primeiroTeste {
 
-    private int num1;
+    private Integer num1;
     private String num2;
     boolean num3;
     public boolean num4;
@@ -8,7 +8,7 @@ private class primeiroTeste {
         // Construtor vazio
     }
 
-    public primeiroTeste(int num1, String num2, boolean num3, boolean num4) {
+    public primeiroTeste(Integer num1, String num2, boolean num3, boolean num4) {
         this.num1 = num1;
         this.num2 = num2;
         this.num3 = num3;
@@ -16,11 +16,11 @@ private class primeiroTeste {
     }
 
 
-    public int getNum1() {
+    public Integer getNum1() {
         return this.num1;
     }
 
-    public void setNum1(int num1) {
+    public void setNum1(Integer num1) {
         this.num1 = num1;
     }
 
