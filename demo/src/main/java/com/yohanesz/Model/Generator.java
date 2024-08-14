@@ -3,11 +3,6 @@ package com.yohanesz.Model;
 import com.yohanesz.languages.javaClass;
 import com.yohanesz.languages.pythonClass;
 
-import static com.yohanesz.Model.optionLanguage.*;
-import static com.yohanesz.Model.Modifier.*;
-import static com.yohanesz.Model.Type.*;
-
-
 import java.io.File;
 
 public class Generator {

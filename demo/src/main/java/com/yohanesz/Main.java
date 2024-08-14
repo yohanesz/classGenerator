@@ -1,17 +1,10 @@
 package com.yohanesz;
 
-import static com.yohanesz.Model.Modifier.DEFAULT;
-import static com.yohanesz.Model.Modifier.PRIVATE;
-import static com.yohanesz.Model.Modifier.PUBLIC;
-import static com.yohanesz.Model.Type.BOOLEAN;
-import static com.yohanesz.Model.Type.INTEGER;
-import static com.yohanesz.Model.Type.STRING;
-import static com.yohanesz.Model.optionLanguage.JAVA;
-import static com.yohanesz.Model.optionLanguage.PYTHON;
+import static com.yohanesz.Model.Modifier.*;
+import static com.yohanesz.Model.Type.*;
+import static com.yohanesz.Model.optionLanguage.*;
 
 import com.yohanesz.Model.Generator;
-import com.yohanesz.Model.Modifier;
-
 
 public class Main {
 
@@ -22,8 +15,8 @@ public class Main {
         gn.startClass("primeiroTeste", PUBLIC); 
         gn.createFile("demo/src/main/java/com/yohanesz").addAttribute(PRIVATE, INTEGER, "num1")
         .addAttribute(PRIVATE, STRING, "num2")
-        .addAttribute(DEFAULT, BOOLEAN, "num3")
-        .addAttribute(PUBLIC, BOOLEAN, "num4")
+        .addAttribute(PRIVATE, BOOLEAN, "num3")
+        .addAttribute(PRIVATE, BOOLEAN, "num4")
         .addMethod(PRIVATE, BOOLEAN, "firstMethod")
         .addMethod(PUBLIC, BOOLEAN, "secondMethod")
         .addMethod(PUBLIC, BOOLEAN, "thirdMethod")

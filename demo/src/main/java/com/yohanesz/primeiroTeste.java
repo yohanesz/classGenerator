@@ -2,8 +2,8 @@ public class primeiroTeste {
 
     private Integer num1;
     private String num2;
-    boolean num3;
-    public boolean num4;
+    private boolean num3;
+    private boolean num4;
 
     public primeiroTeste() {
         // Construtor vazio

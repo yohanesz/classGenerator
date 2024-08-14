@@ -24,10 +24,10 @@ public class pythonClass implements classInterface {
           .append(clazz.getClassName())
           .append(":\n\n");
 
-          generateConstructor();
-          generateAttribute();
-          generateGettersAndSetters();
-          generateMethod();
+        generateConstructor();
+        generateAttribute();
+        generateGettersAndSetters();
+        generateMethod();
 
         try (FileWriter writer = new FileWriter(file)) {
             writer.write(sb.toString());
@@ -90,15 +90,14 @@ public class pythonClass implements classInterface {
     }
 
     private String formatName(String name, String modifier) {
-        switch (modifier.toUpperCase()) {
-            case "PRIVATE":
-                return "__" + name;
-            case "PROTECTED":
-                return "_" + name;
-            case "DEFAULT":
-                return name;
+        
+        switch (modifier.toLowerCase()) {
+            case "private ":
+                return "__" + name;  // Dois underlines para atributos privados
+            case "protected ":
+                return "_" + name;   // Um underline para atributos protegidos
             default:
-                return name;  
+                return "" + name;  // Nenhuma alteração para atributos públicos
         }
     }
 
