@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import com.yohanesz.Model.Attribute;
 import com.yohanesz.Model.Class;
 import com.yohanesz.Model.Method;
-import com.yohanesz.Model.Modifier;
-import com.yohanesz.Model.Type;
 import com.yohanesz.Model.classInterface;
 
 public class javaClass implements classInterface {
@@ -19,11 +17,6 @@ public class javaClass implements classInterface {
 
     public javaClass(Class clazz) {
         this.clazz = clazz;
-    }
-
-    public void createClass(String name, Modifier modifier) {
-        clazz.setClassName(name);
-        clazz.setClassModifier(modifier.getModifierName());
     }
 
 
@@ -105,7 +98,7 @@ public class javaClass implements classInterface {
     }
 
     public void generateConstructor() {
-        sb.append("    public ").append(clazz.getClassName()).append("() {\n");
+        sb.append("\n    public ").append(clazz.getClassName()).append("() {\n");
         sb.append("        // Construtor vazio\n");
         sb.append("    }\n\n");
 

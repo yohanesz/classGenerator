@@ -5,7 +5,7 @@ public enum Modifier {
     PRIVATE("private "),
     PUBLIC("public "),
     PROTECTED("protected "),
-    DEFAULT(""), // Representa o modificador de acesso padrão (package-private)
+    DEFAULT(""), 
     ABSTRACT("abstract "),
     STATIC("static ");
 

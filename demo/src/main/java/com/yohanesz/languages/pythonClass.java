@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import com.yohanesz.Model.Attribute;
 import com.yohanesz.Model.Class;
 import com.yohanesz.Model.Method;
-import com.yohanesz.Model.Modifier;
-import com.yohanesz.Model.Type;
 import com.yohanesz.Model.classInterface;
 
 public class pythonClass implements classInterface {
@@ -21,26 +19,15 @@ public class pythonClass implements classInterface {
         this.clazz = clazz;
     }
 
-    public void createClass(String name, Modifier modifier) {
-        clazz.setClassName(name);
-        clazz.setClassModifier(modifier.getModifierName());
-    }
-
-    public File createFile(String directory) {
-        File file = new File(directory + "/" + clazz.getClassName() + ".py");
-        return file;
-    }
-
-    public void generateClass(String directory) {
-
-        File file = createFile(directory);
+    public void generateClass(File file) {
         sb.append("class ")
           .append(clazz.getClassName())
           .append(":\n\n");
 
-        generateConstructor();
-        generateAttribute(); 
-        generateMethod();   
+          generateConstructor();
+          generateAttribute();
+          generateGettersAndSetters();
+          generateMethod();
 
         try (FileWriter writer = new FileWriter(file)) {
             writer.write(sb.toString());
@@ -53,15 +40,15 @@ public class pythonClass implements classInterface {
         ArrayList<Attribute> attributes = clazz.getAttributes();
         sb.append("    def __init__(self");
         for (Attribute attribute : attributes) {
-            sb.append(", ").append(attribute.getAttributeName());
+            sb.append(", ").append(formatName(attribute.getAttributeName(), attribute.getModifier()));
         }
         sb.append("):\n");
 
         for (Attribute attribute : attributes) {
             sb.append("        self.")
-              .append(attribute.getAttributeName())
+              .append(formatName(attribute.getAttributeName(), attribute.getModifier()))
               .append(" = ")
-              .append(attribute.getAttributeName())
+              .append(formatName(attribute.getAttributeName(), attribute.getModifier()))
               .append("\n");
         }
         sb.append("\n");
@@ -71,26 +58,59 @@ public class pythonClass implements classInterface {
         ArrayList<Method> methods = clazz.getMethods();
         for (Method method : methods) {
             sb.append("    def ")
-              .append(method.getMethodName())
+              .append(formatName(method.getMethodName(), method.getModifier()))
               .append("(self):\n")
               .append("        pass\n\n");
         }
     }
 
-    public void addAttribute(Modifier modifier, Type type, String name) {
-        Attribute atr = new Attribute(modifier.getModifierName(), type.getTypeName(), name);
-        clazz.addAttribute(atr);
+    public void generateGettersAndSetters() {
+        ArrayList<Attribute> attributes = clazz.getAttributes();
+
+        for (Attribute attribute : attributes) {
+            String attributeName = formatName(attribute.getAttributeName(), attribute.getModifier());
+            String methodName = capitalize(attribute.getAttributeName());
+
+            // Getter
+            sb.append("    def get_")
+              .append(methodName)
+              .append("(self):\n")
+              .append("        return self.")
+              .append(attributeName)
+              .append("\n\n");
+
+            // Setter
+            sb.append("    def set_")
+              .append(methodName)
+              .append("(self, value):\n")
+              .append("        self.")
+              .append(attributeName)
+              .append(" = value\n\n");
+        }
     }
 
-    public void addMethod(Modifier modifier, Type type, String name) {
-        Method mtd = new Method(modifier.getModifierName(), type.getTypeName(), name);
-        clazz.addMethod(mtd);
+    private String formatName(String name, String modifier) {
+        switch (modifier.toUpperCase()) {
+            case "PRIVATE":
+                return "__" + name;
+            case "PROTECTED":
+                return "_" + name;
+            case "DEFAULT":
+                return name;
+            default:
+                return name;  
+        }
+    }
+
+    private String capitalize(String name) {
+        if (name == null || name.isEmpty()) {
+            return name;
+        }
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
     public void generateConstructor() {
-        // A lógica de construção do método construtor foi movida para generateAttributes
-        // pois em Python o construtor é definido junto com os atributos na função __init__
+        sb.append("    def __init__(self):\n");
+        sb.append("        pass\n\n");
     }
-
-  
 }

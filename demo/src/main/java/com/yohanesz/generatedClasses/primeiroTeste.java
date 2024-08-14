@@ -1,9 +1,10 @@
-private class primeiroTeste {
+public class primeiroTeste {
 
     private Integer num1;
     private String num2;
     boolean num3;
     public boolean num4;
+
     public primeiroTeste() {
         // Construtor vazio
     }
@@ -48,7 +49,7 @@ private class primeiroTeste {
         this.num4 = num4;
     }
 
-    public boolean firstMethod() {
+    private boolean firstMethod() {
     // Implementação
     }
 

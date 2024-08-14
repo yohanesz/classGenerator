@@ -4,15 +4,18 @@ import com.yohanesz.languages.javaClass;
 import com.yohanesz.languages.pythonClass;
 
 import static com.yohanesz.Model.optionLanguage.*;
+import static com.yohanesz.Model.Modifier.*;
+import static com.yohanesz.Model.Type.*;
+
 
 import java.io.File;
 
 public class Generator {
 
     private classInterface cInterface;
-    private String directory;
     private Class clazz;
     private File file;
+    private String ext;
 
     public Generator(optionLanguage language) {
         this.clazz = new Class();
@@ -20,24 +23,28 @@ public class Generator {
         switch (language) {
             case JAVA:
                 cInterface = new javaClass(clazz);
+                ext = "java";
                 break;
             case PYTHON:
                 cInterface = new pythonClass(clazz);
+                ext = "py";
                 break;
             default:
                 throw new IllegalArgumentException("Linguagem não suportada: " + language);
         }
     }
 
-    public void createFile(String directory) {
-        File file = new File(directory + "/" + clazz.getClassName() + ".java");
-        this.file = file;
-    }
 
     public Generator startClass(String name, Modifier modifier) {
         clazz.setClassName(name);
         clazz.setClassModifier(modifier.getModifierName());
         return this;   
+    }
+
+    public Generator createFile(String directory) {
+        File file = new File(directory + "/" + clazz.getClassName() + "." + ext);
+        this.file = file;
+        return this;
     }
 
     public Generator addAttribute(Modifier modifier, Type type, String name) {
@@ -52,18 +59,8 @@ public class Generator {
         return this;
     }
 
-    public void setDirectory(String directory) {
-        this.directory = directory;
-    }
-
-    public void createClass(String nome, Modifier modifier) {
-        cInterface.createClass(nome, modifier);
-    }
-
-    public void generateClass(File file) {
-       
+    public void generateClass() {
         cInterface.generateClass(file);
-        cInterface.generateAttribute();
     }
     
 }
