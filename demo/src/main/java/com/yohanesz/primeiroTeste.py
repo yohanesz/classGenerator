@@ -3,11 +3,11 @@ class primeiroTeste:
     def __init__(self):
         pass
 
-    def __init__(self, num1, num2, num3, num4):
-        self.__num1 = num1
-        self.__num2 = num2
-        self.__num3 = num3
-        self.__num4 = num4
+    def __init__(self, __num1, __num2, __num3, __num4):
+        self.__num1 = __num1
+        self.__num2 = __num2
+        self.__num3 = __num3
+        self.__num4 = __num4
 
     def get_Num1(self):
         return self.__num1

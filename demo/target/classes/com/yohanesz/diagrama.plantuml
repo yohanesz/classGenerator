@@ -1,0 +1,118 @@
+@startuml Diagrama
+
+class Class {
+    - String classModifier
+    - String className
+    - ArrayList<Attribute> attributes
+    - ArrayList<Method> methods
+    
+    + void addAttribute(Attribute atr)
+    + void addMethod(Method mtd)
+}
+
+class Attribute {
+    - String modifier
+    - String type
+    - String attributeName
+}
+
+class Generator {
+    - classInterface cInterface
+    - Class clazz
+    - File file
+    - String ext
+
+    + Generator(optionLanguage: language)
+    + Generator startClass(String name, Modifier modifier)
+    + Generator createFile(String directory)
+    + Generator addAttribute(Modifier modifier, Type type, String name)
+    + Generator addMethod(Modifier modifier, Type type, String name)
+    + void generateClass()
+}
+
+interface classInterface {
+    + void generateClass(File file)
+    + void generateAttribute()
+    + void generateMethod()
+    + void generateConstructor()
+    + void generateGettersAndSetters()
+}
+
+class pythonClass implements classInterface {
+    - StringBuilder sb
+    - Class clazz
+
+    + pythonClass(Class clazz)
+    + void generateClass(File file)
+    + void generateAttribute()
+    + void generateConstructor()
+    + void generateGettersAndSetters()
+    + void generateMethod()
+    - String capitalize(String str)
+    - String formatName(String name, String modifier)
+}
+
+class javaClass implements classInterface {
+    - StringBuilder sb
+    - Class clazz
+
+    + javaClass(Class clazz)
+    + void generateClass(File file)
+    + void generateAttribute()
+    + void generateConstructor()
+    + void generateGettersAndSetters()
+    + void generateMethod()
+    - String capitalize(String str)
+}
+
+   class Method {
+        - String methodName
+        - String type
+        - String modifier
+    }
+
+    enum Modifier {
+
+        PRIVATE("private ")
+        PUBLIC("public ")
+        PROTECTED("protected ")
+        DEFAULT("")
+        ABSTRACT("abstract ")
+        STATIC("static ")
+
+        + String getModifierName()
+    }
+
+    enum optionLanguage {
+
+        JAVA
+        PYTHON
+    }
+
+     enum Type {
+        INTEGER("Integer"),
+        INT("int"),
+        STRING("String"),
+        BOOLEAN("boolean"),
+        FLOAT("float"),
+        DOUBLE("double"),
+        CHAR("char"),
+        LONG("long"),
+        SHORT("short"),
+        BYTE("byte")
+
+        + String getTypeName()
+    }
+
+
+Class "1" *-- "*" Attribute
+Class "1" *-- "*" Method
+Generator "1" *-- "1" Class
+javaClass "1" *-- "1" Class
+pythonClass "1" *-- "1" Class
+Generator ..> classInterface
+Generator --> Modifier
+Generator --> Type
+Generator --> optionLanguage
+
+@enduml

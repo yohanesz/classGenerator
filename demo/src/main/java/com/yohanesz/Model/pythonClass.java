@@ -1,14 +1,9 @@
-package com.yohanesz.languages;
+package com.yohanesz.Model;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import com.yohanesz.Model.Attribute;
-import com.yohanesz.Model.Class;
-import com.yohanesz.Model.Method;
-import com.yohanesz.Model.classInterface;
 
 public class pythonClass implements classInterface {
 
