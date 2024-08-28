@@ -3,24 +3,24 @@ package com.yohanesz.Main;
 import static com.yohanesz.Model.Modifier.*;
 import static com.yohanesz.Model.Type.*;
 import static com.yohanesz.Model.optionLanguage.*;
-
 import com.yohanesz.Model.Generator;
 
 public class Main {
 
     public static void main(String[] args) {
     
-        Generator gn = new Generator(PYTHON);
+        Generator gn = new Generator(JAVA);
 
-        gn.startClass("primeiroTeste", PUBLIC).addAttribute(PRIVATE, INTEGER, "num1")
-        .addAttribute(PRIVATE, STRING, "num2")
-        .addAttribute(PRIVATE, BOOLEAN, "num3")
-        .addAttribute(PRIVATE, BOOLEAN, "num4")
-        .addMethod(PRIVATE, BOOLEAN, "firstMethod")
-        .addMethod(PUBLIC, BOOLEAN, "secondMethod")
-        .addMethod(PUBLIC, BOOLEAN, "thirdMethod")
+        gn.startClass("Carro", PUBLIC)
+        .addAttribute(PRIVATE, STRING, "modelo").addAttribute(PRIVATE, INTEGER, "ano")
+        .addAttribute(PRIVATE, STRING, "cor")
+        .addAttribute(PRIVATE, DOUBLE, "preco")
+        .addMethod(PUBLIC, BOOLEAN, "iniciarMotor")
+        .addMethod(PUBLIC, BOOLEAN, "acelerar")
+        .addMethod(PUBLIC, BOOLEAN, "frear")
         .createFile("demo/src/main/java/com/yohanesz")
         .generateClass();
+
     }
 
     

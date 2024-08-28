@@ -1,9 +1,14 @@
-package com.yohanesz.Model;
+package com.yohanesz.classesEspecificas;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.yohanesz.Model.Attribute;
+import com.yohanesz.Model.Class;
+import com.yohanesz.Model.classInterface;
+import com.yohanesz.Model.Method;
 
 public class javaClass implements classInterface {
 
